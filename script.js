@@ -64,5 +64,18 @@ $(window).load(function(){
       $('#suggest_box').hide();
   });
 
+  //обработка нажатий клавиш после вывода подсказки
+  $("#search_box").keydown(function(event){
+      switch(event.keyCode) {
+          case 13: // enter
+          break;
+          // обработка нажития на стрелки
+          case 38: // стрелка вверх
+          case 40: // стрелка вниз
+              event.preventDefault();
+          break;
+      }
+  });
+
 
 });
