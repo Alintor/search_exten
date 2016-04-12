@@ -1,5 +1,16 @@
 
 var suggest_count = 0;
+var suggest_url = ["http://suggestqueries.google.com/complete/search?", "http://suggest.yandex.ru/suggest-ya.cgi?"];
+var key_data = ['q', 'part'];
+//данные для запросса на получения подсказок для гугл и яндекса
+var url_data = [{
+  'client':'firefox',
+  'q': ''
+},
+{
+  'v': '4',
+  'part': ''
+}];
 
 
 $(window).load(function(){
@@ -17,9 +28,15 @@ $(window).load(function(){
               // выводятся подсказки только при вводе более 2х символов
               if($(this).val().length>2){
 
+                  //берутся необходимы данные в зависимоти от
+                  //выбранного поискового движка
+                  var index = $( "#search_engine" ).prop('selectedIndex');
+                  var url = suggest_url[index];
+                  var url_d = url_data[index]; //данные для запроса
+                  var key = key_data[index]; //ключь для передачи поисковой строки
+                  url_d[key] = $(this).val(); //добавленние поисковой строки в данные
                   // Отправляем запрос
-                  var url = "http://suggestqueries.google.com/complete/search?";
-                  $.getJSON(url, {'client':'firefox', 'q':$(this).val()}, function(res){
+                  $.getJSON(url, url_d, function(res){
                       //список подсказок содержится вторым элементом в возвращаемом массиве
                       var list = res[1];
                       suggest_count = list.length;
