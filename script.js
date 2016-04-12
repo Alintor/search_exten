@@ -18,6 +18,14 @@ var search_url = ["http://www.google.com/search?as_q=", "https://yandex.ru/searc
 
 
 $(window).load(function(){
+  //загрузка состояния search_engine из перед закрытием
+  chrome.storage.sync.get("search_index", function (obj) {
+      if (obj.search_index!=null)
+      {
+          $( "#search_engine" )[0].selectedIndex = obj.search_index;
+        }
+  });
+
   $("#search_box").keyup(function(event){
       // определение действий при нажатии на клавиатуру
       switch(event.keyCode) {
@@ -68,14 +76,14 @@ $(window).load(function(){
       $('#search_box').val($(this).text());
       // скрытие подсказок
       $('#suggest_box').hide();
-      open_search_page()
+      open_search_page();
   });
 
   //обработка нажатий клавиш после вывода подсказки
   $("#search_box").keydown(function(event){
       switch(event.keyCode) {
           case 13: // enter
-              open_search_page()
+              open_search_page();
           break;
           // обработка нажития на стрелки
           case 38: // стрелка вверх
@@ -86,6 +94,11 @@ $(window).load(function(){
               }
           break;
       }
+  });
+  //сохранение состояния search_engine в памяти после изменения
+  $( "#search_engine" ).change(function(){
+    var index = $( "#search_engine" ).prop('selectedIndex');
+    chrome.storage.sync.set({'search_index': index});
   });
 });
 
@@ -106,8 +119,8 @@ function move_by_list(key){
     }
 }
 
+//открытие страницы поиска в новой вкладке
 function open_search_page(){
   var index = $( "#search_engine" ).prop('selectedIndex');
-  // var urlS = "http://www.google.com/search?as_q=" + $("#search_box").val();
   chrome.tabs.create({url: search_url[index] + $("#search_box").val()});
 }

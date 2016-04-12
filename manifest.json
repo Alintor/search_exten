@@ -15,6 +15,7 @@
   },
   "permissions": [
       "http://suggestqueries.google.com/*",
-      "http://suggest.yandex.ru/*"
+      "http://suggest.yandex.ru/*",
+      "storage"
   ]
 }
