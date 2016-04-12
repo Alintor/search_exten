@@ -55,4 +55,14 @@ $(window).load(function(){
           break;
       }
   });
+
+  // обработка клика по подсказке
+  $(document).on('click', '.suggest_item', function(){
+      // Вставка текста из посказки в поле поиска
+      $('#search_box').val($(this).text());
+      // скрытие подсказок
+      $('#suggest_box').hide();
+  });
+
+
 });

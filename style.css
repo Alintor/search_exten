@@ -12,6 +12,7 @@ body {
 }
 
 #suggest_box .suggest_item {
+  cursor: pointer;
   padding: 5px;
 }
 
