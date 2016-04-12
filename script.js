@@ -12,6 +12,9 @@ var url_data = [{
   'part': ''
 }];
 
+var selected_item = 0;
+var origin_search_value = '';
+
 
 $(window).load(function(){
   $("#search_box").keyup(function(event){
@@ -28,6 +31,8 @@ $(window).load(function(){
               // выводятся подсказки только при вводе более 2х символов
               if($(this).val().length>2){
 
+                  origin_search_value = $(this).val();//запоминаем изначальное значение
+                  selected_item = 0;
                   //берутся необходимы данные в зависимоти от
                   //выбранного поискового движка
                   var index = $( "#search_engine" ).prop('selectedIndex');
@@ -73,9 +78,27 @@ $(window).load(function(){
           case 38: // стрелка вверх
           case 40: // стрелка вниз
               event.preventDefault();
+              if(suggest_count){
+                move_by_list(event.keyCode);
+              }
           break;
       }
   });
-
-
 });
+
+function move_by_list(key){
+    $('#suggest_box div').eq(selected_item-1).removeClass('selected');
+
+    if(key == 40 && selected_item < suggest_count){
+        selected_item++;
+    }else if(key == 38 && selected_item > 0){
+        selected_item--;
+    }
+
+    if( selected_item > 0){
+        $('#suggest_box div').eq(selected_item-1).addClass('selected');
+        $("#search_box").val( $('#suggest_box div').eq(selected_item-1).text() );
+    } else {
+        $("#search_box").val( origin_search_value );
+    }
+}

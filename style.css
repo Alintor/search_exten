@@ -16,7 +16,8 @@ body {
   padding: 5px;
 }
 
-#suggest_box .suggest_item:hover {
+#suggest_box .suggest_item:hover,
+#suggest_box .selected {
   background-color: #026689;
   color: white;
 }
