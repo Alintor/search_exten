@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name" : "Search_exten",
+  "version" : "1.0",
+  "description" : "Расширение для быстрого поиска в Яндексе или Google",
+  "icons": {
+      "64": "img/64.png",
+      "128": "img/128.png"
+  },
+  "browser_action" : {
+      "default_title" : "Search_exten",
+      "default_icon" : "img/128.png",
+      "default_popup" : "popup.html"
+  },
+  "permissions": [
+      "http://suggestqueries.google.com/*",
+      "http://suggest.yandex.ru/*"
+  ]
+}
