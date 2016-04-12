@@ -14,6 +14,7 @@ var url_data = [{
 
 var selected_item = 0;
 var origin_search_value = '';
+var search_url = ["http://www.google.com/search?as_q=", "https://yandex.ru/search/?text="];
 
 
 $(window).load(function(){
@@ -67,12 +68,14 @@ $(window).load(function(){
       $('#search_box').val($(this).text());
       // скрытие подсказок
       $('#suggest_box').hide();
+      open_search_page()
   });
 
   //обработка нажатий клавиш после вывода подсказки
   $("#search_box").keydown(function(event){
       switch(event.keyCode) {
           case 13: // enter
+              open_search_page()
           break;
           // обработка нажития на стрелки
           case 38: // стрелка вверх
@@ -101,4 +104,10 @@ function move_by_list(key){
     } else {
         $("#search_box").val( origin_search_value );
     }
+}
+
+function open_search_page(){
+  var index = $( "#search_engine" ).prop('selectedIndex');
+  // var urlS = "http://www.google.com/search?as_q=" + $("#search_box").val();
+  chrome.tabs.create({url: search_url[index] + $("#search_box").val()});
 }
