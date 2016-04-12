@@ -5,3 +5,17 @@ body {
 #search_box {
   width: 300px;
 }
+
+#suggest_box {
+  margin-left: 75px;
+  margin-top: 5px;
+}
+
+#suggest_box .suggest_item {
+  padding: 5px;
+}
+
+#suggest_box .suggest_item:hover {
+  background-color: #026689;
+  color: white;
+}
