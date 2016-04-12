@@ -76,6 +76,7 @@ $(window).load(function(){
       $('#search_box').val($(this).text());
       // скрытие подсказок
       $('#suggest_box').hide();
+      //открытие страницы с поиском
       open_search_page();
   });
 
@@ -101,16 +102,18 @@ $(window).load(function(){
     chrome.storage.sync.set({'search_index': index});
   });
 });
-
+//передвижение по подсказкам с помощью стрелок
 function move_by_list(key){
+    //удаления класса оформления у предыдущего выбранного элемента
     $('#suggest_box div').eq(selected_item-1).removeClass('selected');
-
+    //выбор направления движения
     if(key == 40 && selected_item < suggest_count){
         selected_item++;
     }else if(key == 38 && selected_item > 0){
         selected_item--;
     }
-
+    //добавление класса оформления для выбранного элемента
+    //и добавления текста подсказки в поле поиска
     if( selected_item > 0){
         $('#suggest_box div').eq(selected_item-1).addClass('selected');
         $("#search_box").val( $('#suggest_box div').eq(selected_item-1).text() );
