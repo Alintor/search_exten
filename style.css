@@ -6,9 +6,27 @@ body {
   width: 300px;
 }
 
+#search_box:focus {
+  border: 2px solid #026689;
+  outline: 0 none;
+}
+
+#search_engine {
+  color: white;
+  background-color: #026689;
+}
+
+#search_engine:focus {
+  border: 2px solid #026689;
+  outline: 0 none;
+  color: #026689;
+  background-color: white;
+}
+
 #suggest_box {
-  margin-left: 75px;
+  margin-left: 70px;
   margin-top: 5px;
+  width: 300px;
 }
 
 #suggest_box .suggest_item {
@@ -16,8 +34,12 @@ body {
   padding: 5px;
 }
 
-#suggest_box .suggest_item:hover,
 #suggest_box .selected {
   background-color: #026689;
   color: white;
+}
+
+#suggest_box .suggest_item:hover{
+  border: 2px solid #026689;
+  padding: 3px;
 }
